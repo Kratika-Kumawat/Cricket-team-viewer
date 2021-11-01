@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'first.css' %}">
+    <title>TEAMS</title>
+    <style>
+        #maindiv {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        #addteamdiv{
+            width: 50%;
+        }
+        #logoutdiv{
+            width: 50%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #heading1{
+            width: 100%;
+            background-color: rgb(201, 197, 197);
+            text-align: center;
+            border: 1px solid ;
+            margin-bottom: 20px;
+       }
+    </style>
+</head>
+
+<body style="background-color: rgb(231, 231, 231)">
+    {%if messages %}
+    {%for message in messages %}
+    {%if message.tags%}
+    <script>
+        alert("{{message}}");
+    </script>
+    {%endif%}
+    {%endfor%}
+    {%endif%}
+    {% if user.is_authenticated %}
+    <h1 class="display-4">Welcome {{ user.username}}</h1>
+    <hr>
+    <div id="maindiv">
+        <div id="addteamdiv"><a class="btn btn-primary" href="addteam">Add team</a></div>
+        <div id="logoutdiv" style="align-content: flex-end;"><a class="btn btn-outline-success" href="logout">Logout</a></div>
+    </div>
+    {%endif%}
+    <div>
+        <h1 id="heading1" >ALL TEAMS</h1>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>TEAM NAME</th>
+                    <th>NAME OF PLAYERS</th>
+                    <th>NO. OF BOWLERS</th>
+                    <th>NO. OF BATSMAN</th>
+                    <th>NO. OF WICKETKEEPERS</th>
+                    <th>NO. OF COACH</th>
+                    <th>LOGO</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for t in team%}
+                <tr>
+                    <td>{{t.id}}</td>
+                    <td>{{t.name}}</td>
+                    <td>{{t.players}}</td>
+                    <td>{{t.bowlers}}</td>
+                    <td>{{t.batsman}}</td>
+                    <td>{{t.wicketkeeper}}</td>
+                    <td>{{t.coach}}</td>
+                    <td><img align="center" style="height: 150px; width: 150px" src="{{t.img.url}}"></td>
+                    <td>
+                        <form action="update">
+                            <input type="hidden" name="id" value="{{t.id}}" />
+                            <input type="submit" value="update" class="btn btn-info" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="delete">
+                            <input type="hidden" name="id" value="{{t.id}}" />
+                            <input type="submit" value="delete" class="btn btn-danger" />
+                        </form>
+                    </td>
+                </tr>
+                {%endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

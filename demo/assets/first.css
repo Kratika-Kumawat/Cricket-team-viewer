@@ -1,0 +1,14 @@
+.heading{
+    color: rgb(1, 1, 26);
+    text-align: center;
+}
+.heading1{
+    text-align: center;
+    font-family: noto sans, sans-serif;
+    letter-spacing: 1.5px;
+    font-size: 25px;
+    color: rgb(3, 73, 78)
+}
+th{
+    color: rgb(3, 37, 87)
+}
